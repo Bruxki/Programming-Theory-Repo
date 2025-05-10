@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class AnimalClass : MonoBehaviour
 {
@@ -9,6 +11,19 @@ public class AnimalClass : MonoBehaviour
     protected float speed = 1f;
 
     protected UnityEngine.AI.NavMeshAgent agent;
+
+    //using state machine for different animal behaviour
+    public enum AnimalState
+    {
+        Idle,
+        Wandering,
+        SearchingFood,
+        SearchingFun,
+        MovingToPoint,
+        FollowingPlayer
+    }
+
+
 
     protected virtual void Start()
     {
