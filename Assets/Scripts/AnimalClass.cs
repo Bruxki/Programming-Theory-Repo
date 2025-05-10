@@ -4,9 +4,15 @@ using UnityEngine.AI;
 
 public class AnimalClass : MonoBehaviour
 {
+    [Header("Stats")]
     protected float hunger = 0f;
     protected float health = 100f;
     protected float happiness = 100f;
+
+    [Header("AI")]
+    public AnimalState currentState = AnimalState.Idle;
+
+
 
     protected float speed = 1f;
 
