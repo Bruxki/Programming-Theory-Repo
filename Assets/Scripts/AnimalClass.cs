@@ -44,6 +44,7 @@ public class AnimalClass : MonoBehaviour
     protected virtual void Update()
     {
         HandleNeeds();
+        StateLogic();
 
     }
 
