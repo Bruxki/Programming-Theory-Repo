@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -19,19 +18,10 @@ public class MainMenu : MonoBehaviour
     MenuOptions menu;
 
 
-
-
-
-
-
     private void Start()
     {
         menu = MenuOptions.Initial;
     }
-
-
-
-
 
     private void Update()
     {
