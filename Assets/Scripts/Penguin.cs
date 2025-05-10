@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class Penguin : MonoBehaviour
+//INHERITANCE
+public class Penguin : AnimalClass
 {
     
 }
