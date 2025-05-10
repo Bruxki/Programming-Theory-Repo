@@ -1,4 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MainMenu : MonoBehaviour
 {
@@ -63,5 +69,15 @@ public class MainMenu : MonoBehaviour
     {
         menu = MenuOptions.Options;
     }
+    public void QuitGame()
+    {
+        //save score
 
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
+
+    }
 }
