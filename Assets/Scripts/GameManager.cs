@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,12 +20,12 @@ public class GameManager : MonoBehaviour
         
 
     //Pause Menu
-        if (!paused && Input.GetKeyDown(KeyCode.P))
+        if (!paused && Input.GetKeyDown(KeyCode.P) )
         { 
             state = gameStates.paused; 
             paused = true;
         }
-        else
+        else if (paused && Input.GetKeyDown(KeyCode.P) )
         {
             state = gameStates.playing;
             paused = false;
@@ -49,5 +50,10 @@ public class GameManager : MonoBehaviour
                 deadScreen.SetActive(true);
                 break;
         }
+    }
+
+    public void QuitToTheMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

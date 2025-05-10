@@ -59,6 +59,11 @@ public class MainMenu : MonoBehaviour
     {
         menu = MenuOptions.Options;
     }
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public void QuitGame()
     {
         //save score
