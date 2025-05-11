@@ -27,10 +27,14 @@ public class AnimalClass : MonoBehaviour
     protected float speed = 1f;
 
     protected Transform playerTarget;
+    protected GameObject deadAnimal;
 
     private GameObject currentTarget;
 
     protected UnityEngine.AI.NavMeshAgent agent;
+
+
+    protected GameManager gameManager;
 
     //using state machine for different animal behaviour
     public enum AnimalState
@@ -47,6 +51,8 @@ public class AnimalClass : MonoBehaviour
 
     protected virtual void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         decisionTimer = decisionTime;
 
@@ -90,7 +96,7 @@ public class AnimalClass : MonoBehaviour
 
     protected virtual void HandleNeeds()
     {
-        food -= Time.deltaTime * 5f;
+        food -= Time.deltaTime * 50f; //change values
         happiness -= Time.deltaTime * 5f;
 
 
@@ -101,8 +107,8 @@ public class AnimalClass : MonoBehaviour
             happiness = 0f;
 
 
-        if (happiness <= 0f && food <= 0f)
-            health -= Time.deltaTime * 5;
+        if (food <= 0f)
+            health -= Time.deltaTime * 50; //change values
 
 
         if (health <= 0f)
@@ -252,5 +258,10 @@ public class AnimalClass : MonoBehaviour
     protected virtual void Die()
     {
         Debug.Log("Animal died");
+
+        GameObject ragdoll = Instantiate(deadAnimal, transform.position, transform.rotation);
+        ragdoll.transform.localScale = transform.localScale;
+        gameManager.Die();
+        Destroy(gameObject);
     }
 }

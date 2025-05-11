@@ -1,11 +1,14 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject menuDuringPlay, pausedMenu, deadScreen;
+    public GameObject menuDuringPlay, pausedMenu, deadScreen, condition, quote;
 
     public AudioClip click;
+
+    public AudioClip endingMusic;
 
     private bool paused = false;
     
@@ -14,7 +17,10 @@ public class GameManager : MonoBehaviour
     {
         playing, paused, deadScreen
     }
-
+    private void Start()
+    {
+        quote.SetActive(false);
+    }
 
     private void Update()
     {
@@ -25,7 +31,7 @@ public class GameManager : MonoBehaviour
         { 
             state = gameStates.paused; 
             paused = true;
-            PlayClick();
+            PlaySound(click);
             Time.timeScale = 0f;
 
         }
@@ -33,7 +39,7 @@ public class GameManager : MonoBehaviour
         {
             state = gameStates.playing;
             paused = false;
-            PlayClick();
+            PlaySound(click);
             Time.timeScale = 1f;
         }
 
@@ -54,17 +60,44 @@ public class GameManager : MonoBehaviour
                 menuDuringPlay.SetActive(false);
                 pausedMenu.SetActive(false);
                 deadScreen.SetActive(true);
+                condition.SetActive(false);
                 break;
         }
     }
-    public void PlayClick()
+
+    public void Die()
     {
-        AudioManager.Instance.PlaySFX(click);
+        AudioManager.Instance.StopMusic();
+        PlaySound(endingMusic);
+        StartCoroutine(WaitingTillScreen(4f));
+        StartCoroutine(WaitingTillQuote(13.2f));
     }
+
+    public void PlaySound(AudioClip sound)
+    {
+        AudioManager.Instance.PlaySFX(sound);
+    }
+    public void StopAllMusic()
+    {
+        AudioManager.Instance.StopMusic();
+    }
+
 
 
     public void QuitToTheMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public IEnumerator WaitingTillScreen(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        state = gameStates.deadScreen;
+
+    }
+    public IEnumerator WaitingTillQuote(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        quote.SetActive(true);
     }
 }

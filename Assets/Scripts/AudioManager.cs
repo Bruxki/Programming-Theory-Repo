@@ -36,6 +36,7 @@ public class AudioManager : MonoBehaviour
     public void StopMusic()
     {
         musicSource.Stop();
+        sfxSource.Stop();
     }
 
 
