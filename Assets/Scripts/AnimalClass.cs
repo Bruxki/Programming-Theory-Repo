@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 //INHERITANCE + INCAPSULATION
 [RequireComponent(typeof(NavMeshAgent))]
 public class AnimalClass : MonoBehaviour
 {
     [Header("Stats")]
-    protected float hunger = 0f;
+    protected float food = 100f;
     protected float health = 100f;
     protected float happiness = 100f;
+
+    [Header("UI Bars")]
+    public Slider healthBar;
+    public Slider foodBar;
+    public Slider happinessBar;
+
 
     [Header("AI")]
     public AnimalState currentState = AnimalState.Idle;
@@ -42,6 +49,16 @@ public class AnimalClass : MonoBehaviour
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         decisionTimer = decisionTime;
+
+        if (healthBar == null)
+            healthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
+        if (foodBar == null)
+            foodBar = GameObject.Find("FoodBar").GetComponent<Slider>();
+        if (happinessBar == null)
+            happinessBar = GameObject.Find("HappinessBar").GetComponent<Slider>();
+
+
+
     }
 
     protected virtual void Update()
@@ -52,7 +69,7 @@ public class AnimalClass : MonoBehaviour
                 && (currentState != AnimalState.FollowingPlayer && currentState != AnimalState.MovingToPoint))
         {
             //Change behaviour based on the stats
-            if (hunger >= 70f && currentState != AnimalState.SearchingFood)
+            if (food <= 30f && currentState != AnimalState.SearchingFood)
             {
                 currentState = AnimalState.SearchingFood;
                 return;
@@ -64,6 +81,8 @@ public class AnimalClass : MonoBehaviour
             }
         }
 
+        UpdateUIBars();
+
         StateLogic();
 
     }
@@ -71,27 +90,41 @@ public class AnimalClass : MonoBehaviour
 
     protected virtual void HandleNeeds()
     {
-        hunger += Time.deltaTime * 2f;
-        happiness -= Time.deltaTime * 2f;
+        food -= Time.deltaTime * 5f;
+        happiness -= Time.deltaTime * 5f;
 
 
-        if (hunger >= 100f)
-            hunger = 100f;
+        if (food <= 0f)
+            food = 0f;
 
         if (happiness <= 0f)
             happiness = 0f;
+
+
+        if (happiness <= 0f && food <= 0f)
+            health -= Time.deltaTime * 5;
 
 
         if (health <= 0f)
             Die();
     }
 
+    protected virtual void UpdateUIBars()
+    {
+        if (healthBar)
+            healthBar.value = health;
+        if (foodBar) 
+            foodBar.value = food;
+        if (happinessBar)
+            happinessBar.value = happiness;
+    }
+
 
     //------[ Pet Behavior ]-----
     protected virtual void Eat(float foodAmount)
     {
-        hunger -= foodAmount;
-        if (hunger < 0f) hunger = 0f;
+        food += foodAmount;
+        if (food < 0f) food = 0f;
     }
 
     protected virtual void Play(float funAmount)

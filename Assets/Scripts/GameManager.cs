@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject menuDuringPlay, pausedMenu, deadScreen;
 
+    public AudioClip click;
 
     private bool paused = false;
     
@@ -24,11 +25,16 @@ public class GameManager : MonoBehaviour
         { 
             state = gameStates.paused; 
             paused = true;
+            PlayClick();
+            Time.timeScale = 0f;
+
         }
         else if (paused && Input.GetKeyDown(KeyCode.P) )
         {
             state = gameStates.playing;
             paused = false;
+            PlayClick();
+            Time.timeScale = 1f;
         }
 
     //Game states managing part
@@ -51,6 +57,11 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+    public void PlayClick()
+    {
+        AudioManager.Instance.PlaySFX(click);
+    }
+
 
     public void QuitToTheMenu()
     {
