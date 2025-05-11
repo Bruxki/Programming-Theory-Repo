@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-//INHERITANCE
+//INHERITANCE + INCAPSULATION
 [RequireComponent(typeof(NavMeshAgent))]
 public class AnimalClass : MonoBehaviour
 {
@@ -14,11 +14,14 @@ public class AnimalClass : MonoBehaviour
     public AnimalState currentState = AnimalState.Idle;
     public float wanderRadius = 5f;
     public float decisionTime = 3f;
-    private float decisionTimer;
+    public float search = 8f;
+    private float decisionTimer, searchTimer;
 
     protected float speed = 1f;
 
     protected Transform playerTarget;
+
+    private GameObject currentTarget;
 
     protected UnityEngine.AI.NavMeshAgent agent;
 
@@ -44,6 +47,23 @@ public class AnimalClass : MonoBehaviour
     protected virtual void Update()
     {
         HandleNeeds();
+
+        if ((currentState != AnimalState.SearchingFood && currentState != AnimalState.SearchingFun)
+                && (currentState != AnimalState.FollowingPlayer && currentState != AnimalState.MovingToPoint))
+        {
+            //Change behaviour based on the stats
+            if (hunger >= 70f && currentState != AnimalState.SearchingFood)
+            {
+                currentState = AnimalState.SearchingFood;
+                return;
+            }
+            else if (happiness <= 30f && currentState != AnimalState.SearchingFun)
+            {
+                currentState = AnimalState.SearchingFun;
+                return;
+            }
+        }
+
         StateLogic();
 
     }
@@ -51,8 +71,8 @@ public class AnimalClass : MonoBehaviour
 
     protected virtual void HandleNeeds()
     {
-        hunger += Time.deltaTime * 0.5f;
-        happiness -= Time.deltaTime * 0.3f;
+        hunger += Time.deltaTime * 2f;
+        happiness -= Time.deltaTime * 2f;
 
 
         if (hunger >= 100f)
@@ -93,6 +113,7 @@ public class AnimalClass : MonoBehaviour
         switch (currentState)
         {
             case AnimalState.Idle:
+                agent.ResetPath();
                 decisionTimer -= Time.deltaTime;
                 if (decisionTimer < 0f)
                 {
@@ -100,9 +121,16 @@ public class AnimalClass : MonoBehaviour
                 }
                 break;
             case AnimalState.Wandering:
+                decisionTimer -= Time.deltaTime;
+
+                if (decisionTimer <= 0f)
+                {
+                    ChangeState(AnimalState.Wandering);
+                    break;
+                }
+
                 if (!agent.pathPending && agent.remainingDistance <= 0.5f)
                 {
-                    decisionTimer -= Time.deltaTime;
                     ChangeState(AnimalState.Idle);
                 }
                 break;
@@ -119,7 +147,27 @@ public class AnimalClass : MonoBehaviour
                 }
                 break;
 
-            //looking for food, fun, etc.
+            case AnimalState.SearchingFood:
+                if (currentTarget == null)
+                {
+                    currentTarget = GameObject.FindWithTag("Food");
+
+                    if (currentTarget != null)
+                        agent.SetDestination(currentTarget.transform.position);
+                }
+                break;
+
+            case AnimalState.SearchingFun:
+                if (currentTarget == null)
+                {
+
+                    currentTarget = GameObject.FindWithTag("Fun");
+
+                    if (currentTarget != null)
+                        agent.SetDestination(currentTarget.transform.position);
+                }
+                break;
+
         }
     }
 
@@ -131,18 +179,41 @@ public class AnimalClass : MonoBehaviour
 
         switch (newState)
         {
+            case AnimalState.Idle:
+                decisionTimer = decisionTime;
+                break;
+
             case AnimalState.Wandering:
+                decisionTimer = decisionTime;
                 Vector3 wanderTarget = transform.position + Random.insideUnitSphere * wanderRadius;
                 wanderTarget.y = transform.position.y;
                 agent.SetDestination(wanderTarget);
                 break;
-
-            //case AnimalState.SearchingFood , fun, etc
-
-
-
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Food"))
+        {
+            Eat(50f);
+            Destroy(collision.gameObject);
+            if (currentState == AnimalState.SearchingFood)
+            {
+                ChangeState(AnimalState.Idle);
+            }
+        }
+        if (collision.gameObject.CompareTag("Fun"))
+        {
+            Play(50f);
+            Destroy(collision.gameObject);
+            if (currentState == AnimalState.SearchingFun)
+            {
+                ChangeState(AnimalState.Idle);
+            }
+        }
+    }
+
 
 
     protected virtual void Die()

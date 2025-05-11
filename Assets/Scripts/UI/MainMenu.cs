@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Security.Cryptography.X509Certificates;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,6 +11,8 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject initialMenu, optionsMenu, choiceMenu;
 
+    public AudioClip music;
+    public AudioClip[] click;
 
     enum MenuOptions
     {
@@ -21,6 +25,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         menu = MenuOptions.Initial;
+        PlayMusic();
     }
 
     private void Update()
@@ -63,6 +68,15 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void PlayMusic()
+    {
+        AudioManager.Instance.PlayMusic(music);
+    }
+    public void PlayClick()
+    {
+        AudioManager.Instance.PlaySFX(click[Random.Range(0,click.Length)]);
+    }
+
 
     public void QuitGame()
     {
