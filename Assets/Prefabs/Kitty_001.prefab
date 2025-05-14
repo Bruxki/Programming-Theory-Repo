@@ -930,7 +930,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6599096708287523329}
-  - component: {fileID: 1591495672830047262}
   - component: {fileID: 2227703126937544846}
   - component: {fileID: 5554499664039340667}
   - component: {fileID: 4112168187062248281}
@@ -951,7 +950,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5848780802549480896}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.9378924, y: 0.00000023841858, z: -9.59514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -960,31 +959,6 @@ Transform:
   - {fileID: 8453376375893004358}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &1591495672830047262
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5848780802549480896}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 0.63
-  m_Radius: 0.26
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.31, z: 0}
 --- !u!95 &2227703126937544846
 Animator:
   serializedVersion: 7
@@ -994,8 +968,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5848780802549480896}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 26ffea2fe0b9fd248b3386ea84c86d12, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 31d2c91682ac6f045b4b75ebf27e5d77, type: 3}
+  m_Controller: {fileID: 9100000, guid: 3cfc736af02b1fe40af13379b5446c63, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -453,7 +453,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4231878480114132041}
-  - component: {fileID: 6469395535443668841}
   - component: {fileID: 9147770182267403256}
   - component: {fileID: 7931879393429171588}
   - component: {fileID: 7765608344803174302}
@@ -474,7 +473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3157656289140444666}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.921, y: 0, z: -9.634117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -483,31 +482,6 @@ Transform:
   - {fileID: 8711054888101462950}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &6469395535443668841
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3157656289140444666}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 0.63
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.49, z: 0}
 --- !u!95 &9147770182267403256
 Animator:
   serializedVersion: 7
@@ -517,8 +491,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3157656289140444666}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7d9cb4d741528094fbd01808d0f03eb0, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 0c0f883d7bc25dd4d84c3c7795a4a332, type: 3}
+  m_Controller: {fileID: 9100000, guid: 83f9006e2266e4d49b99570303c69741, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -619,10 +593,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.47029996
+  m_Height: 1.0600966
   m_Direction: 1
-  m_Center: {x: 0, y: 0.4877957, z: 0}
+  m_Center: {x: 0.00030946732, y: 0.5092047, z: 0}
 --- !u!1 &3755674557043715600
 GameObject:
   m_ObjectHideFlags: 0

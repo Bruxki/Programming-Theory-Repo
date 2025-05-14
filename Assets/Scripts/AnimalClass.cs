@@ -7,6 +7,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class AnimalClass : MonoBehaviour
 {
+
     [Header("Stats")]
     protected float food = 100f;
     protected float health = 100f;
@@ -31,8 +32,9 @@ public abstract class AnimalClass : MonoBehaviour
     private bool lowFoodWarning, lowHealthWarning, lowHappinessWanring;
 
 
-
-    protected float speed = 1f;
+    //Animation handler
+    protected Animator animator;
+    protected float speed;
 
     protected Transform playerTarget;
     protected GameObject deadAnimal;
@@ -60,6 +62,8 @@ public abstract class AnimalClass : MonoBehaviour
 
     protected virtual void Start()
     {
+        animator = GetComponent<Animator>();
+
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -78,6 +82,10 @@ public abstract class AnimalClass : MonoBehaviour
 
     protected virtual void Update()
     {
+        float speed = agent.velocity.magnitude;
+        animator.SetFloat("Speed", speed);
+
+
         HandleNeeds();
 
         searchFoodAgain -= Time.deltaTime;
