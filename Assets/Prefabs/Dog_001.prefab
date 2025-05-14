@@ -598,7 +598,7 @@ MonoBehaviour:
   wanderRadius: 5
   decisionTime: 3
   search: 8
-  deadDog: {fileID: 0}
+  deadDog: {fileID: 6822837222189870847, guid: 072f18b22bd3f014b99dccedcbe3cd42, type: 3}
   dogSound: {fileID: 8300000, guid: c3817a5ebb29b8948b51a746112336bb, type: 3}
 --- !u!136 &5237448023520135206
 CapsuleCollider:

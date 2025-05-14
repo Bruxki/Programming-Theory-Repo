@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject menuDuringPlay, pausedMenu, deadScreen, condition, quote;
+    public GameObject menuDuringPlay, pausedMenu, deadScreen, condition, quote, hint;
 
     public AudioClip click;
 
@@ -80,6 +80,11 @@ public class GameManager : MonoBehaviour
     public void StopAllMusic()
     {
         AudioManager.Instance.StopMusic();
+    }
+    public void DisableHint()
+    {
+        PlaySound(click);
+        hint.SetActive(false);
     }
 
 

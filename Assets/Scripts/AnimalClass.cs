@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-//INHERITANCE + INCAPSULATION
+//INHERITANCE + ENCAPSULATION
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class AnimalClass : MonoBehaviour
 {

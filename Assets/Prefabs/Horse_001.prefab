@@ -991,7 +991,7 @@ MonoBehaviour:
   wanderRadius: 5
   decisionTime: 3
   search: 8
-  deadHorse: {fileID: 0}
+  deadHorse: {fileID: 7398004030005881336, guid: 6280807f2185e094fbcad5e2deaa0070, type: 3}
   horseSound: {fileID: 8300000, guid: 07039f4f331843847ba457aa0a7ec64a, type: 3}
 --- !u!54 &5386417306006081596
 Rigidbody:

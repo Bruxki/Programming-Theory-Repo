@@ -1048,7 +1048,7 @@ MonoBehaviour:
   wanderRadius: 5
   decisionTime: 3
   search: 8
-  deadCat: {fileID: 0}
+  deadCat: {fileID: 3752087181512715572, guid: 5513d1b98e1708a49b251f12247c04f2, type: 3}
   catSound: {fileID: 8300000, guid: 3690f330cdec6d349be637c39e3d2369, type: 3}
 --- !u!136 &3428676510743984165
 CapsuleCollider:
