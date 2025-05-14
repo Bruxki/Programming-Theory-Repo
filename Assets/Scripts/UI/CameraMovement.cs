@@ -92,7 +92,7 @@ public class CameraMovement : MonoBehaviour
     {
         transform.position = Vector3.SmoothDamp(transform.position, target.position, ref velocity, smoothTime);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, 0.02f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, 0.05f);
     }
 
     public void ChoosingFighter()
