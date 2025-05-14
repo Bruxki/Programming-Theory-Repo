@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7435064242073454836}
   - component: {fileID: 1077102781800628392}
   - component: {fileID: 7300092242421317506}
+  - component: {fileID: 133906753051159893}
   m_Layer: 0
   m_Name: Prop_TeddyBear_02
   m_TagString: Fun
@@ -108,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3084752, y: 0.5861664, z: 0.26059565}
   m_Center: {x: 0, y: 0.2887131, z: 0.005978372}
+--- !u!114 &133906753051159893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3571889675238542155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4261b056910504d8b2ab609d3a7ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 7

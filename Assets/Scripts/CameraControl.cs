@@ -135,10 +135,10 @@ public class CameraControl : MonoBehaviour
                     Instantiate(toys[Random.Range(0, toys.Length)], spawnPos, Quaternion.identity);
                     break;
                     case 1:
-                    Instantiate(foods[Random.Range(0, toys.Length)], spawnPos, Quaternion.identity);
+                    Instantiate(foods[Random.Range(0, foods.Length)], spawnPos, Quaternion.identity);
                     break;
                     case 2:
-                    Instantiate(meds[Random.Range(0, toys.Length)], spawnPos, Quaternion.identity);
+                    Instantiate(meds[Random.Range(0, meds.Length)], spawnPos, Quaternion.identity);
                     break;
                 }
 

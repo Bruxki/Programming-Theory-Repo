@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1196281838413809505}
   - component: {fileID: 4477950479466175823}
   - component: {fileID: 2511371423808026420}
+  - component: {fileID: 1365522829782150246}
   m_Layer: 0
   m_Name: Prop_Ball_05
   m_TagString: Fun
@@ -110,3 +111,16 @@ CapsuleCollider:
   m_Height: 0.32810128
   m_Direction: 1
   m_Center: {x: 0, y: 0.0015365258, z: 0}
+--- !u!114 &1365522829782150246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506073740661455133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4261b056910504d8b2ab609d3a7ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 7

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 180885917351064671}
   - component: {fileID: 3555370628291241872}
   - component: {fileID: 5128275886317517129}
+  - component: {fileID: -5108337898887221335}
   m_Layer: 0
   m_Name: Prop_Beauty_05
   m_TagString: Med
@@ -108,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2276281, y: 0.13927624, z: 0.2276281}
   m_Center: {x: 0, y: 0.06963812, z: 0}
+--- !u!114 &-5108337898887221335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895962886324759237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4261b056910504d8b2ab609d3a7ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 7

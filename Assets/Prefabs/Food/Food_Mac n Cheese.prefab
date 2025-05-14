@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2832793736347728228}
   - component: {fileID: 579034723389867783}
   - component: {fileID: 9179938929590831424}
+  - component: {fileID: 4610520751649393948}
   m_Layer: 0
   m_Name: Food_Mac n Cheese
   m_TagString: Food
@@ -108,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3013336, y: 0.12346169, z: 0.28275532}
   m_Center: {x: -0.016056545, y: 0.062409908, z: -0.006766446}
+--- !u!114 &4610520751649393948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067931536329794871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4261b056910504d8b2ab609d3a7ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 7

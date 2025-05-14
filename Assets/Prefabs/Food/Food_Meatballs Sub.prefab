@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5871593095387255644}
   - component: {fileID: 8060152932867574051}
   - component: {fileID: 9195968216513733506}
+  - component: {fileID: 7138245927849643959}
   m_Layer: 0
   m_Name: Food_Meatballs Sub
   m_TagString: Food
@@ -108,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.32036215, y: 0.18020698, z: 0.17894259}
   m_Center: {x: -0.0024420843, y: 0.08967191, z: -0.00014432892}
+--- !u!114 &7138245927849643959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097822537545426819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4261b056910504d8b2ab609d3a7ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 7

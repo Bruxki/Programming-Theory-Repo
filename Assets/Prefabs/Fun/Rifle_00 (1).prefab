@@ -1241,6 +1241,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1032003868594604113}
   - component: {fileID: 3911246345086268806}
+  - component: {fileID: 8375911003900721158}
+  - component: {fileID: -7994249833393138065}
   m_Layer: 0
   m_Name: Rifle_00 (1)
   m_TagString: Fun
@@ -1293,6 +1295,46 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.13719389, y: 0.3378969, z: 0.9028944}
   m_Center: {x: 0.016791135, y: -0.012696149, z: 0.0485528}
+--- !u!54 &8375911003900721158
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8216778713234455035}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-7994249833393138065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8216778713234455035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4261b056910504d8b2ab609d3a7ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 7
 --- !u!1 &8228428236305286051
 GameObject:
   m_ObjectHideFlags: 0
