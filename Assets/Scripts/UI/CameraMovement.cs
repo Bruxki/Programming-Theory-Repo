@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
 public class CameraMovement : MonoBehaviour
@@ -14,7 +15,15 @@ public class CameraMovement : MonoBehaviour
     {
         kitty, horsie, pengwin, doggie, menu, options
     }
+
+  
     CamPosition camPos = CamPosition.menu;
+
+    private void Start()
+    {
+        Time.timeScale = 1f;
+        camPos = CamPosition.menu;
+    }
 
 
     void Update()
@@ -80,10 +89,10 @@ public class CameraMovement : MonoBehaviour
 
     //ABSTRACTION
     public void ChangeCameraPosition(Transform target)
-    {   
+    {
         transform.position = Vector3.SmoothDamp(transform.position, target.position, ref velocity, smoothTime);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, 0.015f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, 0.02f);
     }
 
     public void ChoosingFighter()

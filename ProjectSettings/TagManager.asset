@@ -7,6 +7,8 @@ TagManager:
   - Floor
   - Food
   - Fun
+  - Pet
+  - Med
   layers:
   - Default
   - TransparentFX

@@ -1,10 +1,11 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
 //INHERITANCE + INCAPSULATION
 [RequireComponent(typeof(NavMeshAgent))]
-public class AnimalClass : MonoBehaviour
+public abstract class AnimalClass : MonoBehaviour
 {
     [Header("Stats")]
     protected float food = 100f;
@@ -23,6 +24,13 @@ public class AnimalClass : MonoBehaviour
     public float decisionTime = 3f;
     public float search = 8f;
     private float decisionTimer, searchTimer;
+    private float searchFoodAgain, searchFunAgain, searchingMedAgain;
+    private const float retryDelay = 3f;
+
+
+    private bool lowFoodWarning, lowHealthWarning, lowHappinessWanring;
+
+
 
     protected float speed = 1f;
 
@@ -44,6 +52,7 @@ public class AnimalClass : MonoBehaviour
         SearchingFood,
         SearchingFun,
         MovingToPoint,
+        SearchingMedicine,
         FollowingPlayer
     }
 
@@ -71,17 +80,24 @@ public class AnimalClass : MonoBehaviour
     {
         HandleNeeds();
 
+        searchFoodAgain -= Time.deltaTime;
+        searchFunAgain -= Time.deltaTime;
+        searchingMedAgain -= Time.deltaTime;
+
+
         if ((currentState != AnimalState.SearchingFood && currentState != AnimalState.SearchingFun)
                 && (currentState != AnimalState.FollowingPlayer && currentState != AnimalState.MovingToPoint))
         {
             //Change behaviour based on the stats
-            if (food <= 30f && currentState != AnimalState.SearchingFood)
+            if (food <= 30f && searchFoodAgain <= 0f)
             {
+                currentTarget = null;
                 currentState = AnimalState.SearchingFood;
                 return;
             }
-            else if (happiness <= 30f && currentState != AnimalState.SearchingFun)
+            else if (happiness <= 30f && searchFunAgain <= 0f)
             {
+                currentTarget = null;
                 currentState = AnimalState.SearchingFun;
                 return;
             }
@@ -96,7 +112,7 @@ public class AnimalClass : MonoBehaviour
 
     protected virtual void HandleNeeds()
     {
-        food -= Time.deltaTime * 50f; //change values
+        food -= Time.deltaTime * 5f;
         happiness -= Time.deltaTime * 5f;
 
 
@@ -108,12 +124,44 @@ public class AnimalClass : MonoBehaviour
 
 
         if (food <= 0f)
-            health -= Time.deltaTime * 50; //change values
+            health -= Time.deltaTime * 5;
 
 
         if (health <= 0f)
             Die();
+
+        SoundWarning();
     }
+
+    //Sound Warning if the stats have been depleted
+    protected virtual void SoundWarning()
+    {
+        if (food <30 && !lowFoodWarning)
+        {
+            MakeSound();
+            lowFoodWarning = true;
+        }
+
+        if (happiness <30 && !lowHappinessWanring)
+        {
+            MakeSound();
+            lowHappinessWanring = true;
+        }
+
+        if (health < 30 && !lowHealthWarning)
+        {
+            MakeSound();
+            lowHealthWarning = true;
+        }
+
+        //Reset the warnings
+
+        if (food > 30) lowFoodWarning = false;
+        if (health > 30) lowHealthWarning = false;
+        if (happiness > 30) lowHappinessWanring = false;
+    }
+
+
 
     protected virtual void UpdateUIBars()
     {
@@ -138,6 +186,12 @@ public class AnimalClass : MonoBehaviour
         happiness += funAmount;
         if (happiness > 100f) happiness = 100f;
     }
+    protected virtual void Heal(float healAmount)
+    {
+        health += healAmount;
+        if (health >= 100f) health = 100f;
+    }
+
 
     protected virtual void Move(Vector3 target)
     {
@@ -174,7 +228,13 @@ public class AnimalClass : MonoBehaviour
                 }
                 break;
             case AnimalState.MovingToPoint:
+                decisionTimer -= Time.deltaTime;
                 if (!agent.pathPending && agent.remainingDistance <= 0.5f)
+                {
+                    ChangeState(AnimalState.Idle);
+                }
+                //In case the pet can't get to the point for long enough
+                if (decisionTimer <= 0f)
                 {
                     ChangeState(AnimalState.Idle);
                 }
@@ -193,6 +253,11 @@ public class AnimalClass : MonoBehaviour
 
                     if (currentTarget != null)
                         agent.SetDestination(currentTarget.transform.position);
+                    else
+                    {
+                        searchFoodAgain = retryDelay;
+                        ChangeState(AnimalState.Wandering); 
+                    }
                 }
                 break;
 
@@ -204,12 +269,41 @@ public class AnimalClass : MonoBehaviour
 
                     if (currentTarget != null)
                         agent.SetDestination(currentTarget.transform.position);
+                    else
+                    { 
+                        searchFunAgain = retryDelay;
+                        ChangeState(AnimalState.Wandering); 
+                    }
                 }
+                break;
+
+            case AnimalState.SearchingMedicine:
+
+                if (currentTarget == null)
+                {
+                    currentTarget = GameObject.FindWithTag("Med");
+
+                    if (currentTarget != null)
+                        agent.SetDestination(currentTarget.transform.position);
+                    else
+                    {
+                        searchingMedAgain = retryDelay;
+                        ChangeState(AnimalState.Wandering);
+                    }
+                }
+
                 break;
 
         }
     }
 
+    //override the behavior to go to the palyer's right click location
+    public void SendToPoint(Vector3 point)
+    {
+        currentTarget = null;
+        agent.SetDestination(point);
+        ChangeState(AnimalState.MovingToPoint);
+    }
 
     //State Handler
     protected virtual void ChangeState(AnimalState newState)
@@ -228,11 +322,21 @@ public class AnimalClass : MonoBehaviour
                 wanderTarget.y = transform.position.y;
                 agent.SetDestination(wanderTarget);
                 break;
+
+
+            case AnimalState.MovingToPoint:
+                decisionTimer = decisionTime;
+                break;
         }
     }
 
+    public abstract void MakeSound();
+
+
+    //handle item collection
     private void OnCollisionEnter(Collision collision)
     {
+        //Food
         if (collision.gameObject.CompareTag("Food"))
         {
             Eat(50f);
@@ -242,6 +346,7 @@ public class AnimalClass : MonoBehaviour
                 ChangeState(AnimalState.Idle);
             }
         }
+        //Fun
         if (collision.gameObject.CompareTag("Fun"))
         {
             Play(50f);
@@ -251,9 +356,13 @@ public class AnimalClass : MonoBehaviour
                 ChangeState(AnimalState.Idle);
             }
         }
+        //Health
+        if (collision.gameObject.CompareTag("Med"))
+        {
+            Heal(50f);
+            Destroy(collision.gameObject);
+        }
     }
-
-
 
     protected virtual void Die()
     {

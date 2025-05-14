@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4858187071455124925}
   m_Layer: 0
   m_Name: PenguinPet
-  m_TagString: Untagged
+  m_TagString: Pet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,6 +291,9 @@ MonoBehaviour:
   decisionTime: 3
   search: 8
   deadPenguin: {fileID: 121688724874686537, guid: fd6ff9f28c03e2344a456d124e4e4e2e, type: 3}
+  penguinSound: {fileID: 8300000, guid: 5145e78ce3a6c5747922c8503120e239, type: 3}
+  deathSound: {fileID: 8300000, guid: e7f109667153aad4491b387efb5b7520, type: 3}
+  finalWarning: 0
 --- !u!136 &820608890630419132
 CapsuleCollider:
   m_ObjectHideFlags: 0

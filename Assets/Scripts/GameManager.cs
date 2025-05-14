@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
 
     private bool paused = false;
     
-    gameStates state = gameStates.playing;
-    private enum gameStates
+    public gameStates state = gameStates.playing;
+    public enum gameStates
     {
         playing, paused, deadScreen
     }
